@@ -1,0 +1,18 @@
+//build image by DockerFile in root folder project
+docker build -t mytest .
+docker run -v C:\APP\retro-route-puzzle:/mnt -p 9090:9090 -w /mnt mytest ./scripts/build.sh
+
+//WINDOWS HOST
+//run test cases
+docker run -v C:\APP\retro-route-puzzle:/mnt -p 9090:9090 -w /mnt mytest ./scripts/test.sh
+//example 1 with arguments
+docker run -v C:\APP\retro-route-puzzle:/mnt -p 9090:9090 -w /mnt mytest ./scripts/run.sh -m "maps/map01.json" -r 2 -i "Knife" "Potted_Plant"
+//example 2 with arguments
+docker run -v C:\APP\retro-route-puzzle:/mnt -p 9090:9090 -w /mnt mytest ./scripts/run.sh -m "maps/map02.json" -r 4 -i "Knife" "Potted_Plant" "Pillow"
+
+//LINUX HOST
+//$(pwd) is the root folder project
+docker run -v $(pwd):/mnt -p 9090:9090 -w /mnt mytest ./scripts/build.sh
+docker run -v $(pwd):/mnt -p 9090:9090 -w /mnt mytest ./scripts/test.sh
+docker run -v $(pwd):/mnt -p 9090:9090 -w /mnt mytest ./scripts/run.sh -m "maps/map01.json" -r 2 -i "Knife" "Potted_Plant"
+docker run -v $(pwd):/mnt -p 9090:9090 -w /mnt mytest ./scripts/run.sh -m "maps/map02.json" -r 4 -i "Knife" "Potted_Plant" "Pillow"
